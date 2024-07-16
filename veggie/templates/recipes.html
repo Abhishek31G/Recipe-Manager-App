@@ -24,6 +24,22 @@
     <button type="submit" class="btn btn-success">Add Recipe</button>
   </form>
   <hr/>
+  <div class="mt-5">
+    <div class="mx-auto col-6">
+      <form class="mx-auto card p-3 shadow-lg">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="recipe_name" class="form-label">Search Recipe</label>
+          <input type="text" name="search" id="recipe_name" class="form-control" required />
+        </div>
+    
+        <button type="submit" class="btn btn-primary">Search</button>
+      </form>
+    </div>
+  </div>
+
+
+  <hr/>
   <table class="table table-bordered mt-2 shadow-lg p-2 mx-auto">
     <thead>
       <tr>
@@ -41,7 +57,10 @@
         <td>{{recipe.recipe_name}}</td>
         <td>{{recipe.recipe_description}}</td>
         <td><img src="/media/{{recipe.recipe_image}}" alt="{{recipe.recipe_name}}_image" style="height:100px; width:100px"></td>
-        <td style="display: table-cell; vertical-align: middle; text-align: center;"><a href="/delete-recipe/{{recipe.id}}" class="btn btn-danger">Delete</a></td>
+        <td style="display: table-cell; vertical-align: middle; text-align: center;">
+          <a href="/delete-recipe/{{recipe.id}}" class="btn btn-danger">Delete</a>
+          <a href="/update-recipe/{{recipe.id}}" class="btn btn-success mt-2">Update</a>
+        </td>
       </tr>
     {% endfor %}
     </tbody>
