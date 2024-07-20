@@ -1,0 +1,77 @@
+{% extends 'base.html' %} 
+{% block head %}
+<style>
+    #msg::marker{
+        content: "➡";
+    }
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock %}
+
+{% block body %}
+
+<div class="container mt-5">
+  <form class="col-6 mx-auto card p-3 shadow-lg" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <h2 style="text-align: center;">Register Form</h2>
+    <hr />
+    {% if messages %}
+    <div class="alert alert-info" role="alert">
+            {% for message in messages %}
+            <strong><li id="msg" style="text-align:center; li::marker{content:'ℹ'}">{{ message }}</li></strong>
+            {% endfor %}
+    </div>
+    {% endif %}
+    <div class="mb-3">
+        <label for="first_name" class="form-label">First Name</label>
+        <input type="text" class="form-control" id="first_name" name="first_name" >
+    </div>
+    <div class="mb-3">
+        <label for="last_name" class="form-label">Last Name</label>
+        <input type="text" class="form-control" id="last_name" name="last_name">
+    </div>
+    <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input type="text" class="form-control" id="username" name="username" >
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp">
+        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+    </div>
+    <!-- <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" id="password" name="password">
+    </div> -->
+    <div style="position: relative;" class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" name="password" id="password" placeholder="Password" required="true" class="form-control"/>
+        <span onclick="togglePasswordVisibility('password')" style="position: absolute; right: 10px; top: 85%; transform: translateY(-90%); cursor: pointer;">
+            <i class="fa fa-eye-slash" id = "eye-icon"></i>
+        </span>
+    </div>
+    <p>Already have an account? &nbsp;<a href="/login/">Login</a></p>
+    <button type="submit" class="btn btn-primary">Register</button>
+  </form>
+
+</div>
+  {% endblock %}
+
+{% block js %}
+<script>
+
+    function togglePasswordVisibility(inputFieldId) {
+      var x = document.getElementById(inputFieldId);
+      var y = document.getElementById("eye-icon");
+      if (x.type === "password") {
+          x.type = "text";
+          y.className = "fa fa-eye";
+      } else {
+          x.type = "password";
+          y.className = "fa fa-eye-slash";
+      }
+  }
+  
+</script>
+{% endblock %}
+
