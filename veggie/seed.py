@@ -30,3 +30,20 @@ def seed_db(n=25)->None:
             )
     except Exception as e:
         print(e)
+
+
+
+def create_subject_marks():
+    try:
+        student_objs = Student.objects.all()
+
+        for student in student_objs:
+            subjects = Subject.objects.all()
+            for subject in subjects:
+                SubjectMark.objects.create(
+                    subject = subject,
+                    student = student,
+                    marks = random.randint(0, 100)
+                )
+    except Exception as e:
+        print(e)

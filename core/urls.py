@@ -17,6 +17,7 @@ urlpatterns = [
     path('recipes/', recipes, name="recipes"),
     path('delete-recipe/<int:id>/', delete_recipe, name="delete_recipe"),
     path('update-recipe/<int:id>/', update_recipe, name="update_recipe"),
+    path('students/', get_student, name="get_student"),
     path('admin/', admin.site.urls),
 ]
 
