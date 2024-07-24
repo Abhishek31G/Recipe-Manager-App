@@ -59,7 +59,7 @@
         <td><img src="/media/{{recipe.recipe_image}}" alt="{{recipe.recipe_name}}_image" style="height:100px; width:100px"></td>
         <td style="display: table-cell; vertical-align: middle; text-align: center;">
           <a href="/delete-recipe/{{recipe.id}}" class="btn btn-danger">Delete</a>
-          <a href="/update-recipe/{{recipe.id}}" class="btn btn-success mt-2">Update</a>
+          <a href="/update-recipe/{{recipe.slug}}" class="btn btn-success mt-2">Update</a>
         </td>
       </tr>
     {% endfor %}

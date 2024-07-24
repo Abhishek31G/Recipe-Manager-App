@@ -1,7 +1,12 @@
 {% extends 'base.html' %}
 
 {% block body %}
-<table class="table table-bordered">
+<div class="container"> 
+  <h1>This is Sent Email</h1> 
+  <a href="{% url 'send_email' %}" class="btn btn-success">Send Email</a> 
+</div>
+
+<table class="table table-bordered mt-5">
   <thead>
     <tr>
       <th scope="col">Sr. No</th>

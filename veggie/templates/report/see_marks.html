@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<div class="container mt-5">
+    <table class="table table-success table-striped-columns">
+        <h5>Name: <strong><em style="color: rgb(112, 112, 199);">{{student_name.student_name}}</em></strong></h5>
+        <h5>Total: <strong><em style="color: rgb(112, 112, 199);">{{total_marks.total_marks}}</em></strong></h5>
+        <h5>Percentage: <strong><em style="color: rgb(112, 112, 199);">{{percentage}}</em></strong></h5>
+        <h5>CGPA: <strong><em style="color: rgb(112, 112, 199);">{{cgpa}}</em></strong></h5>
+        <tbody>
+        {% for studprop in student %}
+          <tr>
+            <th scope="row">{{forloop.counter}}</th>
+            <td>{{studprop.subject}}</td>
+            <td>{{studprop.marks}}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table> 
+</div>
+
+{% endblock %}

@@ -16,8 +16,10 @@ urlpatterns = [
     path('register/', register, name="register"),
     path('recipes/', recipes, name="recipes"),
     path('delete-recipe/<int:id>/', delete_recipe, name="delete_recipe"),
-    path('update-recipe/<int:id>/', update_recipe, name="update_recipe"),
+    path('update-recipe/<slug>/', update_recipe, name="update_recipe"),
     path('students/', get_student, name="get_student"),
+    path('see_marks/<student_id>', see_marks, name="see_marks"),
+    path('send_email/', send_email, name="send_email"),
     path('admin/', admin.site.urls),
 ]
 

@@ -1,11 +1,15 @@
 from django.shortcuts import render, redirect
 from .models import *
-from django.db.models import Q
+from django.db.models import Q, Sum
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.paginator import Paginator
+from django.contrib.auth import get_user_model
+
+
+User = get_user_model()
 
 # Create your views here.
 @login_required(login_url="/login/")
@@ -37,8 +41,8 @@ def delete_recipe(request, id):
     queryset.delete()
     return redirect('/recipes/')
 
-def update_recipe(request, id):
-    queryset = Recipe.objects.get(id=id)
+def update_recipe(request, slug):
+    queryset = Recipe.objects.get(slug=slug)
 
     if request.method == "POST":
         recipe_name = request.POST.get('recipe_name')
@@ -129,3 +133,19 @@ def get_student(request):
         "students" : page_obj,
     }
     return render(request, 'report/students.html', context)
+
+
+def see_marks(request, student_id):
+    student = SubjectMark.objects.filter(student__student_id__student_id = student_id)
+    student_name = Student.objects.get(student_id__student_id=student_id)
+    total_marks = student.aggregate(total_marks = Sum('marks'))
+    percentage = round((total_marks['total_marks']/1100) * 100, 2)
+    cgpa = round(percentage/9.5, 2)
+    context ={
+        "student" : student,
+        "total_marks" : total_marks,
+        "student_name" : student_name,
+        "percentage"   : percentage,
+        "cgpa" : cgpa,
+    }
+    return render(request,'report/see_marks.html', context)
